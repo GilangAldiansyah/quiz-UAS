@@ -19,5 +19,15 @@ class DatabaseSeeder extends Seeder
             'harga' => '500000',
             'stok' => '10',
         ]);
+        \App\Models\Product::factory()->create([
+            'nama_produk' => 'Sepatu Futsal',
+            'harga' => '600000',
+            'stok' => '0',
+        ]);
+        \App\Models\Product::factory()->create([
+            'nama_produk' => 'Sepatu Bola',
+            'harga' => '700000',
+            'stok' => '5',
+        ]);
     }
 }

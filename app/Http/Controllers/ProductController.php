@@ -29,8 +29,24 @@ class ProductController extends Controller
         return View::make('product.stokhabis')->with('outOfStockProducts', $outOfStockProducts);
     }
 
-    public function updateStock($productId, $newStock){
-        Product::updateStock($productId, $newStock);
+    public function editStock(int $id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('product.updatestok', compact('product'));
+    }
+
+    public function updateStock(Request $request, $productId){
+        if ($request->input('_method') == 'PUT') {
+            $product = Product::findOrFail($productId);
+    
+            $newStock = $request->input('newStock');
+    
+            $product->stok = $newStock;
+            $product->save();
+    
+            return redirect()->route('product.index')->with('success', 'Stok berhasil diperbarui');
+        }
     }
 
     public function create()
@@ -43,6 +59,11 @@ class ProductController extends Controller
      */
     public function store(Request $request):RedirectResponse
     {
+        $request->validate([
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0'
+        ]);
+
         Product::create([
             'nama_produk'=> $request->nama_produk,
             'stok'     => $request->stok,
@@ -75,7 +96,10 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $product = Product::findOrFail($id);
-
+        $request->validate([
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0'
+        ]);
         $product->update($request->all());
 
         return redirect()->route('product.index')->with('success', 'Produk berhasil diperbaharui');

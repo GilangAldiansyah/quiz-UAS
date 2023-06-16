@@ -3,13 +3,13 @@
 @section('body')
     <h1 class="mb-0">Edit Product</h1>
     <hr />
-    <form action="{{ route('product.upStok', $product->id) }}" method="POST">
+    <form action="{{ route('product.updateStock', ['productId' => $product->id]) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row">
             <div class="col mb-3">
                 <label class="form-label">Stok</label>
-                <input type="text" name="stok" class="form-control" placeholder="stok" value="{{ $product->stok }}" >
+                <input type="text" name="newStock" class="form-control" placeholder="stok" value="{{ $product->stok }}" >
             </div>
         </div>
         <div class="row">

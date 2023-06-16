@@ -36,6 +36,7 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('product.show', $rs->id) }}" type="button" class="btn btn-success">Detail</a>
                                 <a href="{{ route('product.edit', $rs->id)}}" type="button" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('product.editStock', $rs->id)}}" type="button" class="btn btn-primary">Update Stok</a>
                                 <form action="{{ route('product.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Yakin?')">
                                     @csrf
                                     @method('DELETE')
